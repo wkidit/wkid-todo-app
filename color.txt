@@ -1,0 +1,4 @@
+#8E3E63 bg
+#D2649A
+#F6FAB9 text
+#CAE6B2
