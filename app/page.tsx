@@ -9,8 +9,8 @@ export default function Home() {
     <KindeProvider
     clientId="2a935b26ca094412869438c1cdb758fd"
     domain="https://wkidauth.kinde.com"
-    redirectUri="http://localhost:3000"
-    logoutUri="http://localhost:3000"
+    redirectUri="https://wkid-todo-app.vercel.app"
+    logoutUri="https://wkid-todo-app.vercel.app"
     
     >
     <TodoContextProvider>
