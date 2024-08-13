@@ -20,6 +20,7 @@ export default function AddForm() {
             </h2>
             <input 
             type="text"
+            autoFocus
             className="h-[45px] w-full border-[1px] border-[rgba(0,0,0,0.12)] rounded-[5px] ml-[0] mr-[0] my-[9px] px-[16px] py-[9] text-[14px]"
             value={todoContent}
             onChange={(e) => {

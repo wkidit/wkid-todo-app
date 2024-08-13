@@ -1,6 +1,8 @@
 import BgHeading from "@/components/BgHeading";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import TodoList from "./TodoList";
+import Footer from "./Footer";
 
 export default function App() {
   return (
@@ -8,9 +10,10 @@ export default function App() {
       <BgHeading />
       <main className="relative w-[972px] shadow-[0_4px_4px_rgb(0,0,0,0.08)] h-[636px] bg-[#CAE6B2] rounded-[8px] overflow-hidden grid grid-cols-[7fr_4fr] grid-rows-[59px_1fr]">
         <Header />
+        <TodoList />
         <Sidebar />
-        Main App
       </main>
+      <Footer />
     </div>
   );
 }

@@ -6,12 +6,14 @@ interface TodoContextProviderProps {
 
 }
 
+const publicApi = process.env.NEXT_PUBLIC_API
+
 export const TodosContext = createContext<{
   todos: Todo[];
   isLoading: boolean;
   totalCount: number;
   completedCount: number;
-  addTodo: (content: string | "") => void;
+  addTodo: (content: string) => void;
   toggleTodo: (id: number) => void;
   deleteTodo: (id: number) => void;
 } | null>(null)
@@ -26,7 +28,7 @@ export default function TodoContextProvider({
     const totalCount = todos.length;
     const completedCount = todos.filter((todo) => todo.completed).length;
 
-    const addTodo = (content: string | "") => {
+    const addTodo = (content: string) => {
         if (todos.length >= 3) {
             alert("To add more todos, please log in.")
             return;
@@ -53,7 +55,7 @@ export default function TodoContextProvider({
       const fetchTodos = async () => {
         setIsLoading(true);
 
-        const response = await fetch("https://bytegrad.com/course-assets/api/todos");
+        const response = await fetch(`${publicApi}`);
         const todos = await response.json();
         setTodos(todos);
       };
