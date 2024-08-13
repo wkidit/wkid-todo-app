@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { KindeProvider } from "@kinde-oss/kinde-auth-react";
 
 const inter = Inter({ subsets: ["latin"] });
 

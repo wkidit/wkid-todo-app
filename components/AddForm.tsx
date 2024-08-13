@@ -2,7 +2,7 @@
 
 import { useTodosContext } from "@/lib/hooks"
 import { useState } from "react";
-import Button from "./Button";
+import Buttons from "./Buttons";
 
 export default function AddForm() {
     const [todoContent, setTodoContent] = useState("");
@@ -27,7 +27,7 @@ export default function AddForm() {
                 setTodoContent(e.target.value);
             }}
             />
-            <Button>Add to list</Button>
+            <Buttons>Add to list</Buttons>
         </form>
     )
 }

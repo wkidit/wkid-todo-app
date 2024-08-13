@@ -24,7 +24,7 @@ export default function TodoList() {
                         toggleTodo(todo.id)
                     }}
                     >
-                        <span className={`${todo.completed ? "line-through text-[#ccc]" : ""}`}>
+                        <span className={`${todo.completed ? "line-through text-[#322618]" : ""}`}>
                             {todo.content}
                         </span>
                         <DeleteButton id={todo.id}/>

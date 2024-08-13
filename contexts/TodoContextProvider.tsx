@@ -1,4 +1,5 @@
 import { Todo } from '@/lib/types';
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import  { createContext, ReactNode, useEffect, useState } from 'react'
 
 interface TodoContextProviderProps {
@@ -22,6 +23,9 @@ export const TodosContext = createContext<{
 export default function TodoContextProvider({
     children,
 }:TodoContextProviderProps){
+    const { isAuthenticated } = useKindeAuth();
+
+
     const [todos, setTodos] = useState<Todo[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -29,39 +33,52 @@ export default function TodoContextProvider({
     const completedCount = todos.filter((todo) => todo.completed).length;
 
     const addTodo = (content: string) => {
-        if (todos.length >= 3) {
-            alert("To add more todos, please log in.")
-            return;
-        } 
-        setTodos([
-            ...todos,
-            {
-                id: todos.length + 1,
-                content,
-                completed: false,
-            },
-        ]);
+      // check if user is logged in
+      if (todos.length >= 3 && !isAuthenticated) {
+        alert("To add more todos, please log in.");
+        return;
+      }
+  
+      setTodos([
+        ...todos,
+        {
+          id: todos.length + 1,
+          content,
+          completed: false,
+        },
+      ]);
     };
+    
     const toggleTodo = (id: number) => {
       setTodos(
-        todos.map((todo) => todo.id === id ? {...todo, completed: !todo.completed} : todo
+        todos.map((todo) =>
+          todo.id === id ? { ...todo, completed: !todo.completed } : todo
         )
       );
     };
     const deleteTodo = (id: number) => {
       setTodos(todos.filter((todo) => todo.id !== id));
     };
+  
     useEffect(() => {
       const fetchTodos = async () => {
         setIsLoading(true);
-
-        const response = await fetch(`${publicApi}`);
-        const todos = await response.json();
-        setTodos(todos);
+    
+        try {
+          const response = await fetch(`${publicApi}`);
+          const todos = await response.json();
+          setTodos(todos);
+          console.log(todos)
+        } catch (error) {
+          console.error("Failed to fetch todos:", error);
+        } finally {
+          setIsLoading(false);
+        }
       };
-
+    
       fetchTodos();
-    }, [])
+    }, []);
+    
 
   return (
     <TodosContext.Provider
